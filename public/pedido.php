@@ -1,5 +1,6 @@
 <?php
 
+use Database\Database;
 use Model\Pedido;
 
     require_once '../vendor/autoload.php';
@@ -37,6 +38,9 @@ use Model\Pedido;
         $pedido->entrega = null;
     }
 
+    //Criando variável para receber lista de ingredientes
+    $listaItens = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +55,10 @@ use Model\Pedido;
     <h2>Pedido:</h2>
     <?php foreach($pedido->ingredientes as $i) : ?>
         <h3 style="font-family:  courier;">
-            <?= $i ?> <hr>
+            <?php
+                echo $i;
+                $listaItens .= $i . ', '; 
+            ?> <hr>
         </h3>
     <?php endforeach ?>
     
@@ -69,6 +76,20 @@ use Model\Pedido;
     <h3 style="font-family:  courier;  color: red;">
         <?= $pedido->entrega ?> <hr>
     </h3>
+
+<?php
+///////////////////////////////////////////////////////////////////////////////////////////////
+require_once "../src/model/Database.php";
+$db = new Database();
+
+$agora = date('Y-m-d H:i:s');
+
+$db->insert(
+    "INSERT INTO pedidos(data_hora, ingredientes, qtde, pgto, entrega)
+    VALUES('$agora' , '$listaItens' , '$pedido->qtde' , '$pedido->pgto' , '$pedido->entrega')"
+);
+///////////////////////////////////////////////////////////////////////////////////////////////
+?>
 
 </body>
 </html>
