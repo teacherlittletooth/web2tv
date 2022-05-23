@@ -82,11 +82,9 @@ use Model\Pedido;
 require_once "../src/model/Database.php";
 $db = new Database();
 
-$agora = date('Y-m-d H:i:s');
-
 $db->insert(
     "INSERT INTO pedidos(data_hora, ingredientes, qtde, pgto, entrega)
-    VALUES('$agora' , '$listaItens' , '$pedido->qtde' , '$pedido->pgto' , '$pedido->entrega')"
+    VALUES('$pedido->dataHora' , '$listaItens' , $pedido->qtde , '$pedido->pgto' , '$pedido->entrega')"
 );
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ?>

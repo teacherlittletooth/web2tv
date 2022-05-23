@@ -40,7 +40,7 @@
     if($email != null && $pass != null) {
         if($email == $emailDb && $pass == $senhaDb) {
             $result = "Seja bem vindo!";
-            $redirect =
+            //$redirect =
             "<meta http-equiv='refresh' content='2; url=https://www.youtube.com'/>";
         } else {
             $result = "Acesso negado!";
